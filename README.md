@@ -1,5 +1,19 @@
 # hCaptcha solver for Python Selenium.
 
+**Many thanks to [engageub](https://greasyfork.org/fr/users/767752-engageub) for his [hCaptcha solver userscript](https://greasyfork.org/fr/scripts/425854-hcaptcha-solver-automatically-solves-hcaptcha-in-browser).**
+This script is solely intended for the use of **educational purposes only** and **not to abuse any website**.
+The solving speed depends on your PC's compute power and Internet connection.
+
+## Table of contents:
+
+* [Instructions](https://github.com/maximedrn/hcaptcha-solver-python-selenium#instructions).
+  * [hcaptcha-solver.py](https://github.com/maximedrn/hcaptcha-solver-python-selenium#hcaptcha-solverpy)
+  * [your-script.py](https://github.com/maximedrn/hcaptcha-solver-python-selenium#your-scriptpy)
+* [Demonstration](https://github.com/maximedrn/hcaptcha-solver-python-selenium#demonstration).
+* [Website preview](https://github.com/maximedrn/hcaptcha-solver-python-selenium#website-preview).
+
+## Instructions:
+
 * Download this repository or clone it:
 ```
 git clone https://github.com/maximedrn/hcaptcha-solver-python-selenium.git
@@ -139,10 +153,13 @@ if __name__ == '__main__':
     hcaptcha.download_userscript()  # Download the hCaptcha solver userscript.
 ```
 
-# Simple website to try to solve hCaptcha.
+## Demonstration:
+
+![Demonstration GIF](https://github.com/maximedrn/hcaptcha-solver-python-selenium/blob/master/images/demonstration.gif).
+
+## Simple website to try to solve hCaptcha.
 
 * Open a new tab and go to the website [hCaptcha test](https://maximedrn.github.io/hcaptcha-test/).
-
-## Website preview:
+* Website preview:
 
 ![Website preview](https://github.com/maximedrn/hcaptcha-test/blob/master/images/preview.png)
