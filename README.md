@@ -1,8 +1,8 @@
 # hCaptcha solver for Python Selenium.
 
-**Many thanks to [engageub](https://greasyfork.org/fr/users/767752-engageub) for his [hCaptcha solver userscript](https://greasyfork.org/fr/scripts/425854-hcaptcha-solver-automatically-solves-hcaptcha-in-browser).**
-This script is solely intended for the use of **educational purposes only** and **not to abuse any website**.
-The solving speed depends on your PC's compute power and Internet connection.
+**Many thanks to [engageub](https://greasyfork.org/fr/users/767752-engageub) for his [hCaptcha solver userscript](https://greasyfork.org/fr/scripts/425854-hcaptcha-solver-automatically-solves-hcaptcha-in-browser).**  
+  This script is solely intended for the use of **educational purposes only** and **not to abuse any website**.  
+  The solving speed depends on your PC's compute power and Internet connection.
 
 ## Table of contents:
 
