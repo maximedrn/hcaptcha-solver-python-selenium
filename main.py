@@ -14,7 +14,6 @@ from selenium import webdriver
 from selenium.common.exceptions import TimeoutException as TE
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait as WDW
-from selenium.webdriver.support.ui import Select as SC
 from selenium.webdriver.common.by import By
 
 # Python default import.
@@ -94,7 +93,8 @@ class hCaptcha:
         try:
             print('Solving hCaptcha.', end=' ')
             # hCaptcha solver URL test.
-            self.driver.get('https://maximedrn.github.io/hcaptcha-test/')
+            self.driver.get(
+                'https://maximedrn.github.io/hcaptcha-solver-python-selenium/')
             # Check if lenght of "data-hcaptcha-response" attribute is not
             # null. If it's not null, hCaptcha is solved.
             WDW(self.driver, 600).until(lambda _: len(self.element_visible(
