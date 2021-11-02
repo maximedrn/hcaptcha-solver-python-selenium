@@ -159,7 +159,7 @@ if __name__ == '__main__':
 
 ## Simple website to try to solve hCaptcha.
 
-* Open a new tab and go to the website [hCaptcha test](https://maximedrn.github.io/hcaptcha-test/).
+* Open a new tab and go to the website [hCaptcha test](https://maximedrn.github.io/hcaptcha-solver-python-selenium/).
 * Website preview:
 
 ![Website preview](https://github.com/maximedrn/hcaptcha-test/blob/master/images/preview.png)
