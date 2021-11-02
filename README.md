@@ -10,7 +10,7 @@ The solving speed depends on your PC's compute power and Internet connection.
   * [hcaptcha-solver.py](https://github.com/maximedrn/hcaptcha-solver-python-selenium#hcaptcha-solverpy)
   * [your-script.py](https://github.com/maximedrn/hcaptcha-solver-python-selenium#your-scriptpy)
 * [Demonstration](https://github.com/maximedrn/hcaptcha-solver-python-selenium#demonstration).
-* [Website preview](https://github.com/maximedrn/hcaptcha-solver-python-selenium#website-preview).
+* [Website preview](https://github.com/maximedrn/hcaptcha-solver-python-selenium#simple-website-to-try-to-solve-hcaptcha).
 
 ## Instructions:
 
