@@ -137,7 +137,6 @@ from hcaptcha-solver import hCaptcha
 if __name__ == '__main__':
     hcaptcha = hCaptcha()  # Init hCaptcha class.
     hcaptcha.download_userscript()  # Download the hCaptcha solver userscript.
-    hcaptcha.demonstration()  # Demonstrate the hCaptcha solver.
 ```
 
 # Simple website to try to solve hCaptcha.
