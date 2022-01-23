@@ -3,7 +3,7 @@
 
 Github: https://github.com/maximedrn
 Demonstration website: https://maximedrn.github.io/hcaptcha-test/
-Version: 1.0
+Version: 1.1
 """
 
 # Colorama module: pip install colorama
@@ -42,7 +42,8 @@ class hCaptcha:
         """Start webdriver and return state of it."""
         options = webdriver.ChromeOptions()  # Configure options for Chrome.
         options.add_extension(self.extension_path)  # Add extension.
-        options.add_experimental_option(  # Set webdriver language to English.
+        options.add_argument("--lang=en-US")  # Set webdriver language
+        options.add_experimental_option(  # to English. - 2 methods.
             'prefs', {'intl.accept_languages': 'en,en_US'})
         # options.add_argument("headless")  # Headless ChromeDriver.
         options.add_argument('log-level=3')  # No logs is printed.
