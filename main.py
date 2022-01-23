@@ -42,7 +42,7 @@ class hCaptcha:
         """Start webdriver and return state of it."""
         options = webdriver.ChromeOptions()  # Configure options for Chrome.
         options.add_extension(self.extension_path)  # Add extension.
-        options.add_argument('--lang=en')  # Set webdriver language to English.
+        options.add_experimental_option('prefs', {'intl.accept_languages': 'en,en_US'})  # Set webdriver language to English.
         # options.add_argument("headless")  # Headless ChromeDriver.
         options.add_argument('log-level=3')  # No logs is printed.
         options.add_argument('--mute-audio')  # Audio is muted.
