@@ -42,7 +42,7 @@ Then init the class in your Python code. You should have something like this:
 
 Github: https://github.com/maximedrn
 Demonstration website: https://maximedrn.github.io/hcaptcha-test/
-Version: 1.0
+Version: 1.1
 """
 
 # Colorama module: pip install colorama
