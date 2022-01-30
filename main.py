@@ -16,7 +16,6 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium import webdriver
 from selenium.common.exceptions import TimeoutException as TE
 from selenium.webdriver.support import expected_conditions as EC
-from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support.ui import WebDriverWait as WDW
 from selenium.webdriver.common.by import By
@@ -52,7 +51,7 @@ class hCaptcha:
         options.add_argument('--mute-audio')  # Audio is muted.
         options.add_argument("--enable-webgl-draft-extensions")
         options.add_argument("--ignore-gpu-blocklist")
-        driver = webdriver.Chrome(service=self.s, options=options)
+        driver = webdriver.Chrome(service=self.s, options=options) # configure driver with service
         driver.maximize_window()  # Maximize window to reach all elements.
         return driver
 
