@@ -83,7 +83,7 @@ class hCaptcha:
             self.element_clickable('//*[@id="install-area"]/a[1]')
             # Click on "Install" Tampermonkey button.
             self.window_handles(2)  # Switch on Tampermonkey install tab.
-            self.element_clickable('//*[@id="input_SW5zdGFsYXJfdW5kZWZpbmVk_bu"]')
+            self.element_clickable('//*[@id="input_SW5zdGFsYXJfdW5kZWZpbmVk_bu"]') 
             self.window_handles(1)  # Switch to Greasy Fork tab.
             self.driver.close()  # Close this tab.
             self.window_handles(0)  # Switch to main tab.
