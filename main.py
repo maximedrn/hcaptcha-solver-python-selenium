@@ -3,16 +3,21 @@
 
 Github: https://github.com/maximedrn
 Demonstration website: https://maximedrn.github.io/hcaptcha-test/
-Version: 1.1
+Version: 1.0
 """
 
 # Colorama module: pip install colorama
 from colorama import init, Fore, Style
 
+# provide an webdriver manager to install driver automatically
+from webdriver_manager.chrome import ChromeDriverManager
+
 # Selenium module imports: pip install selenium
 from selenium import webdriver
 from selenium.common.exceptions import TimeoutException as TE
 from selenium.webdriver.support import expected_conditions as EC
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support.ui import WebDriverWait as WDW
 from selenium.webdriver.common.by import By
 
@@ -31,26 +36,23 @@ reset = Style.RESET_ALL  # Reset color attribute.
 
 class hCaptcha:
     """Main class of the hCaptcha solver."""
-
-    def __init__(self) -> None:
-        """Set path of used file and start webdriver."""
-        self.webdriver_path = 'assets/chromedriver.exe'
+    def __init__(self): -> None
         self.extension_path = 'assets/Tampermonkey.crx'
-        self.driver = self.webdriver()  # Start new webdriver.
+        self.s = Service(ChromeDriverManager().install()) # Download and install webdriver
+        self.driver = self.webdriver()
 
     def webdriver(self):
         """Start webdriver and return state of it."""
         options = webdriver.ChromeOptions()  # Configure options for Chrome.
         options.add_extension(self.extension_path)  # Add extension.
-        options.add_argument("--lang=en-US")  # Set webdriver language
-        options.add_experimental_option(  # to English. - 2 methods.
-            'prefs', {'intl.accept_languages': 'en,en_US'})
+        #options.add_argument('--lang=en-US')  # Set webdriver language to English.
+        options.add_experimental_option('prefs', {'intl.accept_languages': 'en,en_US'})
         # options.add_argument("headless")  # Headless ChromeDriver.
         options.add_argument('log-level=3')  # No logs is printed.
         options.add_argument('--mute-audio')  # Audio is muted.
         options.add_argument("--enable-webgl-draft-extensions")
         options.add_argument("--ignore-gpu-blocklist")
-        driver = webdriver.Chrome(self.webdriver_path, options=options)
+        driver = webdriver.Chrome(service=self.s, options=options)
         driver.maximize_window()  # Maximize window to reach all elements.
         return driver
 
@@ -82,7 +84,7 @@ class hCaptcha:
             self.element_clickable('//*[@id="install-area"]/a[1]')
             # Click on "Install" Tampermonkey button.
             self.window_handles(2)  # Switch on Tampermonkey install tab.
-            self.element_clickable('//*[@value="Install"]')
+            self.element_clickable('//*[@id="input_SW5zdGFsYXJfdW5kZWZpbmVk_bu"]')
             self.window_handles(1)  # Switch to Greasy Fork tab.
             self.driver.close()  # Close this tab.
             self.window_handles(0)  # Switch to main tab.
