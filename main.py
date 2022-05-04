@@ -6,20 +6,20 @@ Demonstration website: https://maximedrn.github.io/hcaptcha-test/
 Version: 1.1
 """
 
-# Colorama module: pip install colorama
-from colorama import init, Fore, Style
+import os
+# Python default import.
+import sys
 
+# Colorama module: pip install colorama
+from colorama import Fore, Style, init
 # Selenium module imports: pip install selenium
 from selenium import webdriver
 from selenium.common.exceptions import TimeoutException as TE
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait as WDW
-from selenium.webdriver.common.by import By
-
-# Python default import.
-import sys
-import os
-
+from webdriver_manager.chrome import ChromeDriverManager
 
 """Colorama module constants."""
 init(convert=True)  # Init colorama module.
@@ -34,7 +34,6 @@ class hCaptcha:
 
     def __init__(self) -> None:
         """Set path of used file and start webdriver."""
-        self.webdriver_path = 'assets/chromedriver.exe'
         self.extension_path = 'assets/Tampermonkey.crx'
         self.driver = self.webdriver()  # Start new webdriver.
 
@@ -50,7 +49,7 @@ class hCaptcha:
         options.add_argument('--mute-audio')  # Audio is muted.
         options.add_argument("--enable-webgl-draft-extensions")
         options.add_argument("--ignore-gpu-blocklist")
-        driver = webdriver.Chrome(self.webdriver_path, options=options)
+        driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
         driver.maximize_window()  # Maximize window to reach all elements.
         return driver
 
