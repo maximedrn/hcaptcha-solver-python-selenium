@@ -37,6 +37,14 @@ class hCaptcha:
         self.extension_path = 'assets/Tampermonkey.crx'
         self.driver = self.webdriver()  # Start new webdriver.
 
+    def __enter__(self) -> "hCaptcha":
+        """On entry as context manager, return hCaptcha object (self)"""
+        return self
+
+    def __exit__(self, *args, **kwargs) -> None:
+        """On exit of context manager, close the chrome driver"""
+        self.driver.quit()
+
     def webdriver(self):
         """Start webdriver and return state of it."""
         options = webdriver.ChromeOptions()  # Configure options for Chrome.
@@ -119,6 +127,7 @@ if __name__ == '__main__':
     print(f'{green}Made by Maxime. '
           f'\n@Github: https://github.com/maximedrn{reset}')
 
-    hcaptcha = hCaptcha()  # Init hCaptcha class.
-    hcaptcha.download_userscript()  # Download the hCaptcha solver userscript.
-    hcaptcha.demonstration()  # Demonstrate the hCaptcha solver.
+    with hCaptcha() as hcaptcha:        # Init hCaptcha class as a context manager.
+        hcaptcha.download_userscript()  # Download the hCaptcha solver userscript.
+        hcaptcha.demonstration()        # Demonstrate the hCaptcha solver.
+        input("Press any key to exit")
