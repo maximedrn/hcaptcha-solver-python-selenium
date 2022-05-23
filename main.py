@@ -83,8 +83,9 @@ class hCaptcha:
         try:
             print('Installing the hCaptcha solver userscript.', end=' ')
             self.window_handles(1)  # Wait that Tampermonkey tab loads.
-            self.driver.get('https://greasyfork.org/en/scripts/425854-hcaptcha'
-                            '-solver-automatically-solves-hcaptcha-in-browser')
+            self.driver.get(
+                'https://greasyfork.org/en/scripts/445384-hcaptcha-solver-'
+                'with-browser-trainer-automatically-solves-hcaptcha-in-browser')
             # Click on "Install" Greasy Fork button.
             self.element_clickable('//*[@id="install-area"]/a[1]')
             # Click on "Install" Tampermonkey button.
