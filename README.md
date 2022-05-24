@@ -1,5 +1,8 @@
 # hCAPTCHA solver for Python Selenium (any operating system, ChromeDriver and GeckoDriver).
 
+_A Selenium Python tool to automatically solve the hCAPTCHAs using a Tampermonkey userscript._  
+➜ **Version 1.2.0** (May 24, 2022).
+
 This script is solely intended for the use of **educational purposes only** and **not to abuse any website**.  
 The solving speed depends on your PC's compute power and Internet connection.
 
