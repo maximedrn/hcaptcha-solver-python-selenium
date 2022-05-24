@@ -1,134 +1,45 @@
+#!/usr/bin/python
+# main.py
+
+
 """
-@author: Maxime.
+@author: Maxime Dréan.
 
 Github: https://github.com/maximedrn
-Demonstration website: https://maximedrn.github.io/hcaptcha-test/
-Version: 1.1
+Telegram: https://t.me/maximedrn
+
+Copyright © 2022 Maxime Dréan. All rights reserved.
+Any distribution, modification or commercial use is strictly prohibited.
 """
 
-import os
-# Python default import.
-import sys
 
-# Colorama module: pip install colorama
-from colorama import Fore, Style, init
 # Selenium module imports: pip install selenium
-from selenium import webdriver
-from selenium.common.exceptions import TimeoutException as TE
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait as WDW
-from webdriver_manager.chrome import ChromeDriverManager
+from selenium.common.exceptions import TimeoutException as TE
 
-"""Colorama module constants."""
-init(convert=True)  # Init colorama module.
-red = Fore.RED  # Red color.
-green = Fore.GREEN  # Green color.
-yellow = Fore.YELLOW  # Yellow color.
-reset = Style.RESET_ALL  # Reset color attribute.
+# Python internal imports.
+from app.hcaptcha import hCaptcha
+from app.utils.colors import GREEN, RED, RESET
+from app.utils.const import DEMONSTRATION_URL
 
 
-class hCaptcha:
-    """Main class of the hCaptcha solver."""
-
-    def __init__(self) -> None:
-        """Set path of used file and start webdriver."""
-        self.extension_path = 'assets/Tampermonkey.crx'
-        self.driver = self.webdriver()  # Start new webdriver.
-
-    def __enter__(self) -> "hCaptcha":
-        """On entry as context manager, return hCaptcha object (self)"""
-        return self
-
-    def __exit__(self, *args, **kwargs) -> None:
-        """On exit of context manager, close the chrome driver"""
-        self.driver.quit()
-
-    def webdriver(self):
-        """Start webdriver and return state of it."""
-        options = webdriver.ChromeOptions()  # Configure options for Chrome.
-        options.add_extension(self.extension_path)  # Add extension.
-        options.add_argument("--lang=en-US")  # Set webdriver language
-        options.add_experimental_option(  # to English. - 2 methods.
-            'prefs', {'intl.accept_languages': 'en,en_US'})
-        # options.add_argument("headless")  # Headless ChromeDriver.
-        options.add_argument('log-level=3')  # No logs is printed.
-        options.add_argument('--mute-audio')  # Audio is muted.
-        options.add_argument("--enable-webgl-draft-extensions")
-        options.add_argument("--ignore-gpu-blocklist")
-        driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
-        driver.maximize_window()  # Maximize window to reach all elements.
-        return driver
-
-    def element_clickable(self, element: str) -> None:
-        """Click on element if it's clickable using Selenium."""
-        WDW(self.driver, 5).until(EC.element_to_be_clickable(
-            (By.XPATH, element))).click()
-
-    def element_visible(self, element: str):
-        """Check if element is visible using Selenium."""
-        return WDW(self.driver, 20).until(EC.visibility_of_element_located(
-            (By.XPATH, element)))
-
-    def window_handles(self, window_number: int) -> None:
-        """Check for window handles and wait until a specific tab is opened."""
-        WDW(self.driver, 30).until(lambda _: len(
-            self.driver.window_handles) == window_number + 1)
-        # Switch to asked tab.
-        self.driver.switch_to.window(self.driver.window_handles[window_number])
-
-    def download_userscript(self) -> None:
-        """Download the hCaptcha solver userscript."""
-        try:
-            print('Installing the hCaptcha solver userscript.', end=' ')
-            self.window_handles(1)  # Wait that Tampermonkey tab loads.
-            self.driver.get(
-                'https://greasyfork.org/en/scripts/445384-hcaptcha-solver-'
-                'with-browser-trainer-automatically-solves-hcaptcha-in-browser')
-            # Click on "Install" Greasy Fork button.
-            self.element_clickable('//*[@id="install-area"]/a[1]')
-            # Click on "Install" Tampermonkey button.
-            self.window_handles(2)  # Switch on Tampermonkey install tab.
-            self.element_clickable('//*[@value="Install"]')
-            self.window_handles(1)  # Switch to Greasy Fork tab.
-            self.driver.close()  # Close this tab.
-            self.window_handles(0)  # Switch to main tab.
-            print(f'{green}Installed.{reset}')
-        except TE:
-            sys.exit(f'{red}Failed.{reset}')
-
-    def demonstration(self) -> None:
-        """Demonstration of the hCaptcha solver."""
-        try:
-            print('Solving hCaptcha.', end=' ')
-            # hCaptcha solver URL test.
-            self.driver.get(
-                'https://maximedrn.github.io/hcaptcha-solver-python-selenium/')
-            # Check if lenght of "data-hcaptcha-response" attribute is not
-            # null. If it's not null, hCaptcha is solved.
-            WDW(self.driver, 600).until(lambda _: len(self.element_visible(
-                '//div[@class="h-captcha"]/iframe').get_attribute(
-                    'data-hcaptcha-response')) > 0)
-            print(f'{green}Solved.{reset}')
-        except TE:
-            print(f'{red}Failed.{reset}')
-
-
-def cls() -> None:
-    """Clear console function."""
-    # Clear console for Windows using 'cls' and Linux & Mac using 'clear'.
-    os.system('cls' if os.name == 'nt' else 'clear')
+def demonstration(hcaptcha: object) -> None:
+    """Demonstration of the hCAPTCHA solver."""
+    try:
+        print('Solving the hCAPTCHA.', end=' ')
+        hcaptcha.driver.get(DEMONSTRATION_URL)  # hCAPTCHA solver test URL.
+        # Check if the lenght of "data-hcaptcha-response" attribute is
+        # not null. If it's not null, the hCAPTCHA is solved.
+        WDW(hcaptcha.driver, 600).until(lambda _: len(hcaptcha.visible(
+            '//div[@class="h-captcha"]/iframe').get_attribute(
+                'data-hcaptcha-response')) > 0)
+        print(f'{GREEN}Solved.{RESET}')
+    except TE:  # Something went wrong.
+        print(f'{RED}Failed.{RESET}')
 
 
 if __name__ == '__main__':
-
-    cls()  # Clear console.
-
-    print(f'{green}Made by Maxime. '
-          f'\n@Github: https://github.com/maximedrn{reset}')
-
-    with hCaptcha() as hcaptcha:        # Init hCaptcha class as a context manager.
-        hcaptcha.download_userscript()  # Download the hCaptcha solver userscript.
-        hcaptcha.demonstration()        # Demonstrate the hCaptcha solver.
-        input("Press any key to exit")
+    hcaptcha = hCaptcha(  # Initialize the hCAPTCHA class.
+        browser=1, headless=False, comments=True, download=False)
+    hcaptcha.download_userscript()  # Download the userscript.
+    demonstration(hcaptcha)  # Demonstrate the hCAPTCHA solver.
