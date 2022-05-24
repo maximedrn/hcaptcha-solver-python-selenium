@@ -41,7 +41,7 @@ class hCaptcha:
         Initialize the hCAPTCHA class according to choices.
 
         There is a choice of browser: 0 for the ChromeDriver (Google
-        Chrome) and for the GeckoDriver (Mozilla Firefox).
+        Chrome) and 1 for the GeckoDriver (Mozilla Firefox).
         You can choose if you want to enable or disable comments in
         the command prompt for userscript download.
         You can choose to enable or disable automatic userscript download.
